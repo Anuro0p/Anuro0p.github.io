@@ -1,0 +1,31 @@
+body { 
+    margin: 0; 
+    height: 100vh;
+      font-family: Garamond, serif;
+    background-color: black;
+}
+  
+canvas { 
+    display: block;
+}
+
+h1 {
+    color: rgb(43, 43, 43);
+    position: absolute;
+    top: 2em;
+    left: 2em;
+    font-size: 7em;
+    text-transform: uppercase;
+    width: auto;
+    line-height: .8em;
+    padding: .2em;
+  }body{
+    margin: 0;
+    height: 100vh;
+}
+
+canvas{
+    display: block;
+  }
+
+  
