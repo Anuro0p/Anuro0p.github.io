@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import img1 from "../a1.jpg";
 import img2 from "../a2.jpg";
 import img3 from "../a3.jpg";
@@ -9,23 +9,10 @@ import img6 from "../6.png";
 import "./styles.css";
 
 const ImageScroll = () => {
-  const [animationDuration, setAnimationDuration] = useState(35); // Initial duration in seconds
-
-  const handleMouseEnter = () => {
-    setAnimationDuration(100); // Slow down the animation on hover (double the duration)
-  };
-
-  const handleMouseLeave = () => {
-    setAnimationDuration(35); // Restore the original animation duration
-  };
   return (
     <div className=" container1 flex">
       <div className="grad  "></div>
-      <div
-        className="images "
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
+      <div className="images ">
         <div className="img-slide ">
           <div className="flex">
             <img
