@@ -50,7 +50,7 @@ const Navbar = () => {
             </a>
           </li>
           <li>
-            <a
+            <p
               onClick={(e) => {
                 e.preventDefault();
                 window.open(
@@ -61,7 +61,7 @@ const Navbar = () => {
               className="hover:text-gray-400 alegreya-head cursor-pointer"
             >
               Instagram
-            </a>
+            </p>
           </li>
           <li>
             <a href="#contact" className="hover:text-gray-400 alegreya-head">

@@ -1,1 +1,0 @@
-IDRViewer.config = {"pagecount":1,"title":"","author":"","subject":"","keywords":"","creator":"","producer":"","creationdate":"","moddate":"","trapped":"","fileName":"Spicetree - newsletter.pdf","bounds":[[993,2884]],"bookmarks":[],"thumbnailType":"jpg","pageType":"html","pageLabels":[]};
