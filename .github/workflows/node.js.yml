@@ -19,7 +19,7 @@ jobs:
           node-version: "16" # Specify the Node.js version
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build the React app
         run: npm run build
