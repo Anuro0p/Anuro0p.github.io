@@ -33,7 +33,6 @@ const ImageScroll = () => {
               style={{
                 maxWidth: "310px",
                 borderRadius: "17px",
-                borderRadius: "17px",
               }}
               alt=""
             />
