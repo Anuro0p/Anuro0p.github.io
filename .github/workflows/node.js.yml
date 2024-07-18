@@ -3,7 +3,7 @@ name: Build and Deploy React App to GitHub Pages
 on:
   push:
     branches:
-      - main # Trigger on pushes to the main branch
+      - dev # Trigger on pushes to the main branch
 
 jobs:
   build:
@@ -23,9 +23,6 @@ jobs:
 
       - name: Build the React app
         run: npm run build
-
-      - name: Add CNAME file
-        run: echo 'anuroop.online' > ./build/CNAME # Replace with your custom domain
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
@@ -48,7 +45,9 @@ jobs:
           path: ./build # Path to download the build artifacts
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build # Directory to publish to GitHub Pages
+          publish_branch: main
+          cname: anuroop.online
