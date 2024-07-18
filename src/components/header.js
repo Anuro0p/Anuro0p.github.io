@@ -44,32 +44,20 @@ const Header = ({ scrolled }) => {
           </button>
         </div>
         <div class="flex justify-between items-center">
-          <a
-            href="#"
-            class="p-2 lg:px-4 md:mx-1 text-white text-center border border-transparent  hover:text-[#FF520E] transition-colors duration-300"
-          >
+          <p class="p-2 lg:px-4 md:mx-1 text-white text-center border border-transparent  hover:text-[#FF520E] transition-colors duration-300">
             Home
-          </a>
-          <a
-            href="#"
-            class="p-2 lg:px-4 md:mx-1 text-white text-center border border-transparent  hover:text-[#FF520E] transition-colors duration-300"
-          >
+          </p>
+          <p class="p-2 lg:px-4 md:mx-1 text-white text-center border border-transparent  hover:text-[#FF520E] transition-colors duration-300">
             Skills
-          </a>
-          <a
-            href="#"
-            class="p-2 lg:px-4 md:mx-1 text-white text-center border border-transparent  hover:text-[#FF520E] transition-colors duration-300"
-          >
+          </p>
+          <p class="p-2 lg:px-4 md:mx-1 text-white text-center border border-transparent  hover:text-[#FF520E] transition-colors duration-300">
             About
-          </a>
+          </p>
         </div>
         <div class="flex justify-between items-center">
-          <a
-            href="#"
-            class="p-2 lg:px-4 md:mx-2 text-white text-center border border-solid border-[#FF520E]  rounded  hover:text-[#FF520E] transition-colors duration-300 mt-1 md:mt-0 md:ml-1"
-          >
+          <p class="p-2 lg:px-4 md:mx-2 text-white text-center border border-solid border-[#FF520E]  rounded  hover:text-[#FF520E] transition-colors duration-300 mt-1 md:mt-0 md:ml-1">
             Contact
-          </a>
+          </p>
         </div>
       </div>
     </nav>

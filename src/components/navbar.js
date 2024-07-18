@@ -6,22 +6,15 @@ const Navbar = () => {
       <nav className="df-bg1 df-text shadow-lg shadow-[#111] w-full py-4 px-8 flex   justify-between items-center rounded-full ">
         <ul className="flex space-x-8">
           <li>
-            <a
-              href="#home"
-              className="hover:text-gray-400 font-light alegreya-head df-text"
-            >
+            <p className="hover:text-gray-400 font-light alegreya-head df-text">
               Home
-            </a>
+            </p>
           </li>
           <li>
-            <a href="#projects" className="hover:text-gray-400 alegreya-head">
-              Projects
-            </a>
+            <p className="hover:text-gray-400 alegreya-head">Projects</p>
           </li>
           <li>
-            <a href="#team" className="hover:text-gray-400 alegreya-head">
-              Team
-            </a>
+            <p className="hover:text-gray-400 alegreya-head">Team</p>
           </li>
         </ul>
         <div className="flex items-center space-x-2">
@@ -45,9 +38,7 @@ const Navbar = () => {
         </div>
         <ul className="flex space-x-8">
           <li>
-            <a href="#about" className="hover:text-gray-400 alegreya-head">
-              About
-            </a>
+            <p className="hover:text-gray-400 alegreya-head">About</p>
           </li>
           <li>
             <p
@@ -64,9 +55,7 @@ const Navbar = () => {
             </p>
           </li>
           <li>
-            <a href="#contact" className="hover:text-gray-400 alegreya-head">
-              Contact
-            </a>
+            <p className="hover:text-gray-400 alegreya-head">Contact</p>
           </li>
         </ul>
       </nav>

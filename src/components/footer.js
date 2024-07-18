@@ -16,15 +16,9 @@ const Footer = () => {
       <div className="border-t border-gray-700 mt-8 pt-4 text-center text-sm">
         <p className="mb-2">© 2024 Anuroop Vijayan. All rights reserved.</p>
         <div className="flex flex-col md:flex-row justify-center space-y-2 md:space-y-0 md:space-x-4">
-          <a href="#" className="hover:underline">
-            Privacy Policy
-          </a>
-          <a href="#" className="hover:underline">
-            Terms of Service
-          </a>
-          <a href="#" className="hover:underline">
-            Cookies Settings
-          </a>
+          <p className="hover:underline">Privacy Policy</p>
+          <p className="hover:underline">Terms of Service</p>
+          <p className="hover:underline">Cookies Settings</p>
         </div>
       </div>
     </footer>
