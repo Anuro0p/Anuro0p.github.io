@@ -45,7 +45,7 @@ jobs:
           path: ./build # Path to download the build artifacts
 
       - name: Deploy to GitHub Pages
-        uses: Anuro0p/actions-gh-pages@main
+        uses: actions/deploy-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build # Directory to publish to GitHub Pages
