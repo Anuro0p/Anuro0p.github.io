@@ -52,3 +52,4 @@ jobs:
           enable_jekyll: true
           publish_branch: main
           cname: anuroop.online
+          commit_message: ${{ github.event.head_commit.message }}
