@@ -1,14 +1,5 @@
-import { useEffect, useState } from "react";
 import "./App.css";
-import Header from "./components/header";
 import Hero from "./components/hero";
-import logo1 from "./logo1.png";
-import logo2 from "./logo2.png";
-import logo3 from "./logo3.png";
-import logo4 from "./logo4.png";
-import logo5 from "./logo5.png";
-import logo6 from "./logo6.png";
-import ImageScroll from "./components/imageScroll";
 import Navbar from "./components/navbar";
 import ContactSection from "./components/contact";
 import Footer from "./components/footer";
@@ -16,29 +7,6 @@ import WhyChooseMe from "./components/why-choose-me";
 import SkillsAndExpertise from "./components/skills";
 
 function App() {
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (scrollPosition > 100) {
-      setIsScrolled(true);
-    } else {
-      setIsScrolled(false);
-    }
-  }, [scrollPosition]);
-
   return (
     <body class="df-bg df-text">
       {/* <Header scrolled={isScrolled} /> */}
