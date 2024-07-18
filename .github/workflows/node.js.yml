@@ -19,10 +19,13 @@ jobs:
           node-version: "16" # Specify the Node.js version
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci # Use 'npm ci' for a clean install
 
       - name: Build the React app
         run: npm run build
+
+      - name: Add CNAME file
+        run: echo 'anuroop.online' > ./build/CNAME # Replace with your custom domain
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
