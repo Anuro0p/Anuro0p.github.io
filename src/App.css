@@ -1,4 +1,5 @@
-/* write your css here */
+
+
 
 .df-height{
   height: 800px;
@@ -139,47 +140,83 @@
     background: radial-gradient(circle, #701d1d71 0%, #701d1d02 59%);
     height: 1200px;
     width: 1200px;
-    position: absolute;
+    position: fixed;
     left:-700px;
     z-index: 0;
     top:600px;
-    animation: moveUpDown 20s ease-in-out infinite;
+    animation: moveUpDown 70s ease-in-out infinite;
+  }
+  .elipseGrad3{
+    background: radial-gradient(circle, #331d7071 0%, #331d7002 59%);
+    height: 1600px;
+    width: 1600px;
+    position: fixed;
+    right:-1000px;
+    overflow: hidden;
+    z-index: 0;
+    top:600px;
+    animation: moveUpDown3 60s ease-in-out infinite;
+  }
+
+  .elipseGrad2{
+    background: radial-gradient(circle, #1d3e7080 0%, #1d3e7000 59%);
+    height: 1200px;
+    width: 1200px;
+    position: fixed;
+    left:-700px;
+    z-index: 0;
+    top:1000px;
+    animation: moveUpDown2 95s ease-in-out infinite;
   }
 
   @keyframes moveUpDown {
     0% {
-      top: 800px;
-    }
-    50% {
-      top: 0px;
+      top: 1200px;
     }
     100% {
-      top: 800px;
+      top: -1200px;
+    }
+
+  }
+  @keyframes moveUpDown3 {
+    0% {
+      top: 1400px;
+    }
+    50% {
+      top: -800px;
+    }
+    100% {
+      top: 1400px;
     }
   }
   @keyframes moveUpDown2 {
     0% {
       top: 1000px;
-      left: 300px
+      left: -700px
+    }
+    25%{
+      left:0px
     }
     50% {
       top: 0px;
-      left: 0px
+      left: -700px
+    }
+    75%{
+      left:0px
     }
     100% {
       top: 1000px;
-      left: 300px
+      left: -700px
     }
   }
-  .elipseGrad2{
-    background: radial-gradient(circle, #1d3e7080 0%, #1d3e7000 59%);
-    height: 1200px;
-    width: 1200px;
-    position: absolute;
-    left:-700px;
-    z-index: 0;
-    top:1000px;
-    animation: moveUpDown 20s ease-in-out infinite;
+  
+
+  p{
+    z-index: 10;
+  }
+  h1{
+    z-index: 10;
+    position: relative;
   }
 
 

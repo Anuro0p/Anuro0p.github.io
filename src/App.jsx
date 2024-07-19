@@ -11,6 +11,7 @@ function App() {
       {/* <Header scrolled={isScrolled} /> */}
       <div className="elipseGrad"></div>
       <div className="elipseGrad2"></div>
+      <div className="elipseGrad3"></div>
       <Navbar />
 
       <Hero />
