@@ -7,7 +7,7 @@ import SkillsAndExpertise from "./components/skills";
 
 function App() {
   return (
-    <body style={{ backgroundImage: bgbg }} class="df-bg df-text">
+    <body class="df-bg df-text">
       {/* <Header scrolled={isScrolled} /> */}
       <div className="elipseGrad"></div>
       <div className="elipseGrad2"></div>
