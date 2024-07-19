@@ -4,9 +4,13 @@ import ImageScroll from "./imageScroll";
 const Hero = () => {
   return (
     <section className="flex  flex-col justify-center df-height px-20  df-text">
-      <h1 className="text-6xl  alegreya-title">Innovative</h1>
-      <h1 className="text-6xl  mb-8 alegreya-title">Software Solutions.</h1>
-      <p className="text-lg  mb-8 alegreya-head 	">
+      <h1 className=" df-hero-title font-extrabold alegreya-title">
+        Innovative
+      </h1>
+      <h1 className="df-hero-title font-extrabold  mb-8 alegreya-title">
+        Software Solutions.
+      </h1>
+      <p className="text-xl  mb-8 alegreya-head 	">
         Crafting cutting-edge software solutions with a modern touch.
       </p>
       <div className="flex space-x-4">

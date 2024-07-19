@@ -5,10 +5,11 @@ import ContactSection from "./components/contact";
 import Footer from "./components/footer";
 import WhyChooseMe from "./components/why-choose-me";
 import SkillsAndExpertise from "./components/skills";
+import bgbg from "./bgbg.png";
 
 function App() {
   return (
-    <body class="df-bg df-text">
+    <body style={{ backgroundImage: bgbg }} class="df-bg df-text">
       {/* <Header scrolled={isScrolled} /> */}
       <div className="elipseGrad"></div>
       <div className="elipseGrad2"></div>
@@ -16,7 +17,7 @@ function App() {
 
       <Hero />
       <SkillsAndExpertise />
-      <WhyChooseMe />
+      {/* <WhyChooseMe /> */}
       <ContactSection />
       <Footer />
 

@@ -1,7 +1,7 @@
 /* write your css here */
 
 .df-height{
-  height: 700px;
+  height: 800px;
 }
 .topz{
   z-index: 100;
@@ -96,11 +96,25 @@
     font-style: normal;
   }
 
+  .df-hero-title{
+    font-size: 5.5rem;
+    margin: 0;
+    line-height: 1.2;
+  }
   .df-bg{
     background-color: #181618;
+    /* background-image: url('./bgbg.png');
+    background-repeat: no-repeat;
+    background-size: cover; */
   }
   .df-bg1{
     background-color: #18161888;
+  }
+
+  .df-reverse{
+    background-color: #D0DBD6;
+    color: #181618;
+    z-index: 10;
   }
 
   .df-text{
@@ -122,7 +136,7 @@
   }
 
   .elipseGrad{
-    background: radial-gradient(circle, #701d1d89 0%, #701d1d02 59%);
+    background: radial-gradient(circle, #701d1d71 0%, #701d1d02 59%);
     height: 1200px;
     width: 1200px;
     position: absolute;
