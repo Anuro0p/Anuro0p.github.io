@@ -142,7 +142,34 @@
     position: absolute;
     left:-700px;
     z-index: 0;
-    top:700px;
+    top:600px;
+    animation: moveUpDown 20s ease-in-out infinite;
+  }
+
+  @keyframes moveUpDown {
+    0% {
+      top: 800px;
+    }
+    50% {
+      top: 0px;
+    }
+    100% {
+      top: 800px;
+    }
+  }
+  @keyframes moveUpDown2 {
+    0% {
+      top: 1000px;
+      left: 300px
+    }
+    50% {
+      top: 0px;
+      left: 0px
+    }
+    100% {
+      top: 1000px;
+      left: 300px
+    }
   }
   .elipseGrad2{
     background: radial-gradient(circle, #1d3e7080 0%, #1d3e7000 59%);
@@ -151,7 +178,8 @@
     position: absolute;
     left:-700px;
     z-index: 0;
-    top:1200px;
+    top:1000px;
+    animation: moveUpDown 20s ease-in-out infinite;
   }
 
 
