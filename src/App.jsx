@@ -3,9 +3,7 @@ import Hero from "./components/hero";
 import Navbar from "./components/navbar";
 import ContactSection from "./components/contact";
 import Footer from "./components/footer";
-import WhyChooseMe from "./components/why-choose-me";
 import SkillsAndExpertise from "./components/skills";
-import bgbg from "./bgbg.png";
 
 function App() {
   return (
