@@ -38,7 +38,7 @@ const Navbar = () => {
         </div>
         <ul className=" flex space-x-8">
           <li>
-            <p data-cursor-hover className="hover:text-gray-400 alegreya-head">About</p>
+            <p data-cursor-hover className="hidden md:block hover:text-gray-400 alegreya-head">About</p>
           </li>
           <li>
             <p data-cursor-hover
