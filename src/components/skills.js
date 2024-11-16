@@ -4,14 +4,15 @@ const SkillsAndExpertise = () => {
   const [expand, setExpand] = useState("");
   return (
     <section className=" text-white py-12 alegreya-head">
-      <div className="container  mx-auto df-text flex flex-col md:flex-row">
-        <div className="flex items-center  md:w-2/5 mb-8 h-72 md:mb-0">
-          <div className="ml-12 relative">
-            <h2 className="text-6xl font-extrabold">Skills & </h2>
-            <h2 className="text-6xl font-extrabold">Expertise</h2>
+      <div className="container justify-center md:justify-start  mx-auto df-text flex flex-col md:flex-row">
+        <div className="flex items-center justify-center md:justify-start  md:w-2/5 mb-8 md:h-72 md:mb-0">
+          <div className="md:ml-12 relative">
+            <h2 className="md:hidden text-3xl font-extrabold">Skills & Expertise</h2>
+            <h2 className="hidden md:block text-6xl font-extrabold">Skills & </h2>
+            <h2 className="hidden md:block text-6xl font-extrabold">Expertise</h2>
           </div>
         </div>
-        <div className="md:w-3/5">
+        <div className="md:w-3/5 flex flex-col items-center justify-center md:justify-start">
           <h3 className="text-3xl font-bold mb-6">Technologies</h3>
           <ul className="tracking-wider font-thin	">
             <li
@@ -40,7 +41,7 @@ const SkillsAndExpertise = () => {
                   </p>
                 )}
               </div>
-              <span className="text-2xl">&rarr;</span>
+              <span className="text-2xl md:mr-0 mr-8">&rarr;</span>
             </li>
             <li
               onClick={() => setExpand("back")}
@@ -66,7 +67,7 @@ const SkillsAndExpertise = () => {
                   </p>
                 )}
               </div>
-              <span className="text-2xl">&rarr;</span>
+              <span className="text-2xl md:mr-0 mr-8">&rarr;</span>
             </li>
             <li
               onClick={() => setExpand("full")}
@@ -95,7 +96,7 @@ const SkillsAndExpertise = () => {
                 )}
               </div>
               <span
-                className={`text-2xl ${
+                className={`text-2xl md:mr-0 mr-8 ${
                   expand == "full" ? "transform rotate-90" : ""
                 }`}
               >
@@ -128,7 +129,7 @@ const SkillsAndExpertise = () => {
                 )}
               </div>
               <span
-                className={`text-2xl ${
+                className={`text-2xl md:mr-0 mr-8 ${
                   expand == "mobile" ? "transform rotate-90" : ""
                 }`}
               >
@@ -160,7 +161,7 @@ const SkillsAndExpertise = () => {
                 )}
               </div>
               <span
-                className={`text-2xl ${
+                className={`text-2xl md:mr-0 mr-8 ${
                   expand == "devops" ? "transform rotate-90" : ""
                 }`}
               >

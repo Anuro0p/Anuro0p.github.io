@@ -3,15 +3,15 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className=" alegreya-head  py-8">
-      <div className="container mx-auto px-4 grid md:grid-cols-3 grid-cols-1  justify-between">
-        <div>Anuroop Vijayan</div>
+    <footer className=" alegreya-head md:border-none border-t border-gray-700 mt-8  py-8">
+      <div className="container mx-auto px-4 grid gap-4 md:grid-cols-3 grid-cols-1  justify-between">
+        <div className='justify-center hidden md:block md:text-start text-center'>Anuroop Vijayan</div>
         <div className="flex gap-8 item-center justify-center">
           <div>Contact</div>
           <div>About</div>
           <div>LinkedIn</div>
         </div>
-        <div className="justify-end flex gap-4 aligh-right">
+        <div className="md:justify-end justify-center flex gap-4 md:aligh-right">
           <svg
             onClick={(e) => {
               e.preventDefault();

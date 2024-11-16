@@ -1,14 +1,40 @@
 // ContactSection.js
-import React from "react";
+import React, { useRef } from "react";
+import emailjs from "emailjs-com";
+
 
 const ContactSection = () => {
+
+  const formRef = useRef();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_darh7x5",  // Replace with your EmailJS Service ID
+        "template_95rhj4c", // Replace with your EmailJS Template ID
+        formRef.current,
+        'ziJ0llg9yTOBAmwIp' // User ID from your .env file
+      )
+      .then(
+        (result) => {
+          console.log("Email sent successfully:", result.text);
+          alert("Your message has been sent!");
+        },
+        (error) => {
+          console.error("Email sending error:", error.text);
+          alert("Failed to send message. Please try again.");
+        }
+      );
+  };
   return (
     <section
       style={{ zIndex: 99 }}
-      className="z-1 relative  alegreya-head border-t border-gray-700 flex flex-col md:flex-row items-center justify-center min-h-screen  pr-12"
+      className="z-1 relative  alegreya-head border-t border-gray-700 flex flex-col md:flex-row items-center justify-center min-h-screen  md:pr-12"
     >
-      <div className="df-reverse shadow-lg p-12 mr-24  rounded-3xl py-18 shadow-lg w-full md:w-1/2 lg:w-2/5">
-        <form className="space-y-14">
+      <div className="df-reverse shadow-lg p-12 md:mr-24  md:rounded-3xl py-18 w-full md:w-1/2 lg:w-2/5">
+        <form ref={formRef} onSubmit={handleSubmit} className="space-y-14">
           <div>
             <label htmlFor="name" className="block text-sm font-medium mb-2">
               Your Name
@@ -53,9 +79,9 @@ const ContactSection = () => {
           </button>
         </form>
       </div>
-      <div className="mt-8 md:mt-0 md:ml-8    md:text-left">
-        <h2 className="text-7xl font-bold mb-4">Let’s Connect!</h2>
-        <p className="mb-8 text-xl font-thin">
+      <div className="flex flex-col justify-center md:items-start items-center mt-8 md:mt-0 md:ml-8    md:text-left">
+        <h2 className="md:text-7xl text-3xl font-bold mb-4">Let’s Connect!</h2>
+        <p className="mb-8 text-xl text-center font-thin">
           Got an exciting project hustle in mind? Let’s transform it into a
           groundbreaking reality.
         </p>

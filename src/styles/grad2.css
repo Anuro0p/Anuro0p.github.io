@@ -1,0 +1,60 @@
+:root {
+  --d1: 320.54deg;
+  --d2: 58.72deg;
+  --d3: 121.28deg;
+  --d4: 180deg;
+  --d5: 52.23deg;
+  --d6: 121.28deg;
+  --d7: 50% 72.12% at 50% 50%;
+  --d8: 72.37%;
+  --p1: 0%;
+  --p2: 100%;
+  --p3: 0.5%;
+  --blend-one: screen, color-dodge, color-burn, screen, overlay, difference,
+    color-dodge;
+  --blend-two: screen, color-dodge, color-burn, screen, overlay, difference;
+  --no-blend: inherit;
+  --c1: #e10157;
+  --c2: #90d270;
+  --c3: #1d1298;
+  --c4: #48f5ed;
+  --c5: #dfcca2;
+  --c6: #86bdb9;
+  --c7: #361027;
+  --c8: #e856d4;
+  --c9: #4907ae;
+  --c10: #d10097;
+  --c11: #5e9665;
+  --c12: #e586b4;
+  --c13: #bc7f52;
+  --c14: #ae6505;
+  --c15: #c682e8;
+  --c16: #e33b72;
+  --c17: #b12dec;
+  --c18: #dc5732;
+  --c19: #c35052;
+  --c20: #6d2fc9;
+}
+body {
+  background: linear-gradient(
+      var(--d1),
+      var(--c1) var(--p1),
+      var(--c11) var(--d8)
+    ),
+    linear-gradient(var(--d2), var(--c2) var(--p1), var(--c12) var(--p2)),
+    linear-gradient(var(--d3), var(--c3) var(--p1), var(--c13) var(--p2)),
+    linear-gradient(var(--d3), var(--c4) var(--p1), var(--c14) var(--p2)),
+    linear-gradient(
+      var(--d4),
+      var(--c5) var(--p1),
+      var(--c15) var(--p3),
+      var(--c17) var(--p2)
+    ),
+    linear-gradient(var(--d5), var(--c6) var(--p1), var(--c16) var(--p2)),
+    linear-gradient(var(--d6), var(--c7) var(--p1), var(--c10) var(--p2)),
+    radial-gradient(var(--d7), var(--c8) var(--p1), var(--c9) var(--p2));
+  background-blend-mode: var(--blend-two);
+  height: 100vh;
+  width: 100%;
+  backdrop-filter: none;
+}

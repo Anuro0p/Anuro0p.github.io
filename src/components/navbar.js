@@ -2,22 +2,22 @@ import React from "react";
 
 const Navbar = () => {
   return (
-    <div className="w-full p-4 fixed topz ">
+    <div className="w-full p-4 mt-8 fixed topz ">
       <nav className="df-bg1 df-text shadow-lg shadow-[#111] w-full py-4 px-8 flex   justify-between items-center rounded-full ">
         <ul className="flex space-x-8">
           <li>
-            <p className="hover:text-gray-400 font-light alegreya-head df-text">
+            <p data-cursor-hover className="hidden md:block hover:text-gray-400 font-light alegreya-head df-text">
               Home
             </p>
           </li>
           <li>
-            <p className="hover:text-gray-400 alegreya-head">Projects</p>
+            <p data-cursor-hover id='data-cursor-hover' className="hidden md:block hover:text-gray-400 alegreya-head data-cursor-hover">Projects</p>
           </li>
           <li>
-            <p className="hover:text-gray-400 alegreya-head">Team</p>
+            <p data-cursor-hover className="hidden md:block hover:text-gray-400 alegreya-head">Team</p>
           </li>
         </ul>
-        <div className="flex items-center space-x-2">
+        <div data-cursor-hover className="flex items-center space-x-2">
           <span className="text-xl">
             <svg
               width="25"
@@ -32,16 +32,16 @@ const Navbar = () => {
               />
             </svg>
           </span>
-          <span className="cursor-default text-l alegreya-head">
+          <span className=" text-l alegreya-head">
             Anuroop Vijayan
           </span>
         </div>
-        <ul className="flex space-x-8">
+        <ul className=" flex space-x-8">
           <li>
-            <p className="hover:text-gray-400 alegreya-head">About</p>
+            <p data-cursor-hover className="hover:text-gray-400 alegreya-head">About</p>
           </li>
           <li>
-            <p
+            <p data-cursor-hover
               onClick={(e) => {
                 e.preventDefault();
                 window.open(
@@ -49,13 +49,13 @@ const Navbar = () => {
                   "_blank"
                 );
               }}
-              className="hover:text-gray-400 alegreya-head cursor-pointer"
+              className="hover:text-gray-400 alegreya-head hidden md:block  "
             >
               Instagram
             </p>
           </li>
           <li>
-            <p className="hover:text-gray-400 alegreya-head">Contact</p>
+            <p data-cursor-hover className="hover:text-gray-400 alegreya-head hidden md:block ">Contact</p>
           </li>
         </ul>
       </nav>

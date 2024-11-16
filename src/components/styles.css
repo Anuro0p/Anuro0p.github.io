@@ -5,6 +5,28 @@
     top:0;
   }
 
+  body{
+    cursor: none;
+  }
+  div{
+    cursor: none;
+  }
+  a{
+    cursor: none;
+  }
+  a:hover{
+    cursor: none;
+  }
+  text{
+    cursor: none;
+  }
+  text:hover{
+    cursor: none;
+  }
+  button:hover{
+    cursor: none;
+  }
+
 
 .images {
     overflow: hidden;
@@ -70,3 +92,72 @@
     margin-top: -120px;
     margin-bottom: 120px;
   }
+
+  .blob {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 550px;
+    height: 550px;
+    border-radius: 100%;
+    background-image: linear-gradient(#2a2a2a 10%, #6f6f6f);
+    filter: blur(250px);
+    transition: all 450ms ease-out;
+    position: fixed;
+    pointer-events: none;
+    left: 0;
+    top: 0;
+    transform: translate(calc(-50% + 15px), -50%);
+    z-index: 0;
+  }
+
+  .custom-cursor {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(58, 58, 58, 0.7);
+    border: 2px solid rgba(94, 93, 91, 0.155); /* Adjust color and opacity */
+    border-radius: 50%;
+    pointer-events: none; /* Prevent interactions */
+    cursor: none;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    transition: transform 0.1s ease, background-color 0.2s ease;
+  }
+  .custom-cursor-dot {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 5px;
+    height: 5px;
+    background-color: rgba(214, 214, 214, 0.933);
+    border: 2px solid rgba(167, 167, 167, 0.535); /* Adjust color and opacity */
+    border-radius: 50%;
+    pointer-events: none; /* Prevent interactions */
+    cursor: none;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    transition: transform 0.1s ease, background-color 0.2s ease;
+  }
+  
+  /* Optional: Add hover effects */
+  .custom-cursor.hovered {
+    transform: translate(-50%, -50%) scale(1.5);
+    background-color: rgba(111, 111, 111, 0.097); /* Change color when hovered */
+    border: 2px solid rgba(124, 124, 124, 0.139);
+    cursor: none;
+  }
+
+  .custom-cursor:hover{
+    cursor: none;
+  }
+
+
+
+/* Random CSS for Demo */
+
+
+
+
