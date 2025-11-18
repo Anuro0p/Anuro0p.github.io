@@ -82,6 +82,10 @@ const Model3D = () => {
   // Clone the scene to avoid issues with multiple instances
   const clonedScene = scene.clone();
 
+  // Constants for Z position interpolation
+  const startZ = 9;
+  const endZ = 0;
+
   // Track scroll position and calculate progress
   useEffect(() => {
     const handleScroll = () => {
@@ -91,25 +95,29 @@ const Model3D = () => {
       
       // Calculate scroll progress (0 to 1)
       // Adjust these values to control when the animation starts/ends
-      const maxScroll = documentHeight - windowHeight;
+      const maxScroll = Math.max(documentHeight - windowHeight, 1); // Prevent division by zero
       const progress = Math.min(Math.max(scrollY / maxScroll, 0), 1);
       
       setScrollProgress(progress);
     };
 
     if (typeof window !== 'undefined') {
+      // Call immediately to set initial position
+      handleScroll();
       window.addEventListener('scroll', handleScroll);
-      handleScroll(); // Initial call
-      return () => window.removeEventListener('scroll', handleScroll);
+      // Also listen for resize to recalculate on window size changes
+      window.addEventListener('resize', handleScroll);
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+        window.removeEventListener('resize', handleScroll);
+      };
     }
   }, []);
 
   // Update tunnel position based on scroll
   useFrame(() => {
     if (tunnelRef.current) {
-      // Interpolate Z position from 6 to 0 based on scroll progress
-      const startZ = 9;
-      const endZ = 0;
+      // Interpolate Z position from startZ to endZ based on scroll progress
       const currentZ = startZ - (startZ - endZ) * scrollProgress;
       
       tunnelRef.current.position.x = 0.6;
@@ -131,8 +139,11 @@ const Model3D = () => {
 
   // Position tunnel at origin so camera is inside it
   // Rotated 90 degrees on Y axis
+  // Initial position matches startZ (9) when scrollProgress is 0
+  const initialZ = startZ - (startZ - endZ) * scrollProgress;
+  
   return (
-    <group ref={tunnelRef} position={[0.6, -1, 7]} rotation={[0, 270 * Math.PI / 180, 0]} scale={[1, 1, 1]}>
+    <group ref={tunnelRef} position={[0.6, -1, initialZ]} rotation={[0, 270 * Math.PI / 180, 0]} scale={[1, 1, 1]}>
       <primitive object={clonedScene} />
     </group>
   );
