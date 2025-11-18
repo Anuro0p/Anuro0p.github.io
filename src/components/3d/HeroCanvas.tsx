@@ -87,10 +87,10 @@ const Model3D = ({ currentModel }: { currentModel: 'model1' | 'model2' }) => {
   const clonedScene = currentScene.clone();
 
   // Constants for Z position interpolation
-  const startZ1 = 20;
+  const startZ1 = 17;
   const startZ = 9;
-  const endZ1 = 2;
-  const endZ = 0;
+  const endZ1 = -50;
+  const endZ = -20;
 
   // Track scroll position and calculate progress
   useEffect(() => {
