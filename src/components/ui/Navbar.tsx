@@ -11,7 +11,7 @@ export const Navbar = () => {
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
-    { id: 'work', label: 'Work' },
+    // { id: 'work', label: 'Work' },
     { id: 'contact', label: 'Contact' },
   ];
 
@@ -54,12 +54,12 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6 backdrop-blur-sm bg-black/30">
+    <nav className="top-0 right-0 left-0 z-50 fixed flex justify-between items-center bg-black/30 backdrop-blur-sm px-8 py-6">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-xl font-bold text-white cursor-pointer"
+        className="font-bold text-white text-xl cursor-pointer"
         onClick={(e) => handleNavClick(e as any, 'home')}
       >
         AV
@@ -78,13 +78,13 @@ export const Navbar = () => {
               <a
                 href={`#${item.id}`}
                 onClick={(e) => handleNavClick(e, item.id)}
-                className="relative text-sm font-medium text-white/80 transition-colors hover:text-white cursor-pointer"
+                className="relative font-medium text-white/80 hover:text-white text-sm transition-colors cursor-pointer"
               >
                 {item.label}
                 {isActive && (
                   <motion.div
                     layoutId="navbar-indicator"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-white"
+                    className="right-0 -bottom-1 left-0 absolute bg-white h-0.5"
                     initial={false}
                     transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                   />

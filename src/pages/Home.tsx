@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { SectionTitle } from '../components/ui/SectionTitle';
 import { Particles } from '../components/3d/Particles';
 import { LightRig } from '../components/3d/LightRig';
@@ -53,6 +53,64 @@ export const Home = () => {
     email: '',
     message: '',
   });
+
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
+  const [aboutOpacity, setAboutOpacity] = useState(0.6);
+  const aboutSectionRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    let ticking = false;
+    
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+          // Hide indicator when user scrolls more than 50px
+          setShowScrollIndicator(scrollY <= 50);
+          
+          // Calculate about section opacity based on scroll position
+          if (aboutSectionRef.current) {
+            const sectionTop = aboutSectionRef.current.offsetTop;
+            const windowHeight = window.innerHeight;
+            
+            // Calculate when section first enters viewport (when top of section reaches bottom of viewport)
+            const sectionStart = sectionTop - windowHeight;
+            
+            // Calculate scroll progress (0 to 1) from when section enters viewport to when top reaches top of screen
+            let progress = 0;
+            if (scrollY < sectionStart) {
+              // Before section is visible, keep at 60%
+              progress = 0;
+            } else if (scrollY >= sectionStart && scrollY < sectionTop) {
+              // Map scroll position to progress (0 to 1) as section approaches top of viewport
+              const scrollRange = sectionTop - sectionStart;
+              const scrolled = scrollY - sectionStart;
+              progress = Math.min(1, Math.max(0, scrolled / scrollRange));
+            } else {
+              // When section top reaches or passes top of viewport, keep at 100%
+              progress = 1;
+            }
+            
+            // Map progress from 0.6 (60%) to 1.0 (100%)
+            const opacity = 0.6 + (progress * 0.4);
+            setAboutOpacity(Math.min(1, Math.max(0.6, opacity)));
+          }
+          
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Initial check
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const timelineItems = [
     {
@@ -157,10 +215,54 @@ export const Home = () => {
             </motion.p>
           </div>
         </div>
+
+        {/* Scroll Indicator */}
+        <AnimatePresence>
+          {showScrollIndicator && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="bottom-8 left-1/2 z-20 absolute -translate-x-1/2 pointer-events-none"
+            >
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+                className="flex flex-col items-center gap-2"
+              >
+                <span className="font-light text-white/60 text-sm">Scroll</span>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-white/60"
+                >
+                  <path d="M7 13l5 5 5-5" />
+                  <path d="M7 6l5 5 5-5" />
+                </svg>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </section>
 
       {/* About Section */}
-      <section id="about" className="bg-black opacity-85 py-24 min-h-screen">
+      <section 
+        id="about" 
+        ref={aboutSectionRef}
+        className="bg-black py-24 min-h-screen transition-opacity duration-100"
+        style={{ opacity: aboutOpacity }}
+      >
         <div className="mx-auto px-8 max-w-7xl">
           <SectionTitle title="About" subtitle="Get to know me" />
 
@@ -251,6 +353,7 @@ export const Home = () => {
       </section>
 
       {/* Work Section */}
+      {false && (
       <section id="work" className="bg-black py-24 min-h-screen">
         <div className="mx-auto px-8 max-w-7xl">
           <SectionTitle title="Work" subtitle="Selected projects" />
@@ -316,7 +419,7 @@ export const Home = () => {
             <p className="text-white/60">More projects coming soon...</p>
           </motion.div>
         </div>
-      </section>
+      </section>)}
 
       {/* Contact Section */}
       <section id="contact" className="bg-black py-24 min-h-screen">
