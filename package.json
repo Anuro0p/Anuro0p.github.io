@@ -1,31 +1,43 @@
 {
   "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.4.0",
+    "@studio-freight/lenis": "^1.0.42",
+    "framer-motion": "^12.23.24",
+    "gsap": "^3.13.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.9.6",
+    "three": "^0.181.1"
   },
   "devDependencies": {
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
+    "@types/three": "^0.181.0",
     "@vitejs/plugin-react": "^4.2.1",
+    "@vitejs/plugin-react-swc": "^4.2.2",
     "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.4.38",
     "prettier": "^3.3.1",
     "prettier-plugin-tailwindcss": "^0.6.1",
     "tailwindcss": "^3.4.4",
+    "typescript": "^5.5.0",
     "vite": "^5.2.0"
   },
   "name": "react-vite-tailwind-prettier",
   "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "format": "prettier --write \\\"src/**/*.{js,jsx}\\\""
+    "format": "prettier --write \\\"src/**/*.{js,jsx}\\\"",
+    "deploy": "gh-pages -d dist"
   },
   "type": "module",
   "version": "0.0.0"
