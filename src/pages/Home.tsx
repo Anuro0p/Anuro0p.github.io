@@ -143,17 +143,15 @@ export const Home = () => {
               initial={{ opacity: 0, y: 26 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              style={{ fontSize: "60px", fontWeight: "400" }}
-              className="mx-auto font-light text-white/90 text-lg"
+              className="mx-auto font-light text-white/90 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl"
             >
               Anuroop Vijayan
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 32 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              style={{ fontSize: "20px", fontWeight: "400" }}
-              className="mx-auto max-w-2xl font-light text-white/90 text-lg"
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="mx-auto mt-4 sm:mt-6 max-w-2xl font-light text-white/90 text-sm sm:text-base md:text-lg lg:text-xl"
             >
               Creative Developer
             </motion.p>
