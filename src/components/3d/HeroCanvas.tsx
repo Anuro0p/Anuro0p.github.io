@@ -1,7 +1,8 @@
-import { Suspense, useRef, useState, useEffect } from 'react';
+import { Suspense, useRef, useState, useEffect, useCallback } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Stars, Text3D, useGLTF } from '@react-three/drei';
+import { Stars, Text3D, useGLTF, useProgress } from '@react-three/drei';
 import { CosmicParticles } from './CosmicParticles';
+import { Loader } from '../ui/Loader';
 import * as THREE from 'three';
 import modelPath from './models/model1.glb?url';
 
@@ -155,11 +156,26 @@ const CameraRig = ({ children }: { children: React.ReactNode }) => {
 };
 
 /**
+ * Loading progress tracker component
+ * Tracks loading progress and communicates it to parent
+ */
+const LoadingTracker = ({ onProgress }: { onProgress: (progress: number, active: boolean) => void }) => {
+  const { progress, active } = useProgress();
+  
+  useEffect(() => {
+    onProgress(progress, active);
+  }, [progress, active, onProgress]);
+
+  return null;
+};
+
+/**
  * Main scene component
  */
-const Scene = () => {
+const Scene = ({ onLoadingProgress }: { onLoadingProgress: (progress: number, active: boolean) => void }) => {
   return (
     <>
+      <LoadingTracker onProgress={onLoadingProgress} />
       <CameraRig>
         {/* Background Stars */}
         <Stars radius={300} depth={60} count={3500} factor={4} fade speed={1} />
@@ -185,14 +201,23 @@ const Scene = () => {
 };
 
 export const HeroCanvas = () => {
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleLoadingProgress = useCallback((progress: number, active: boolean) => {
+    setLoadingProgress(progress);
+    setIsLoading(active);
+  }, []);
+
   return (
     <div className="-z-10 fixed inset-0 bg-black w-screen h-screen overflow-hidden">
+      <Loader progress={loadingProgress} active={isLoading} />
       <Canvas 
         camera={{ position: [0, 0, 7], fov: 55 }}
         gl={{ alpha: false }}
       >
         <Suspense fallback={null}>
-          <Scene />
+          <Scene onLoadingProgress={handleLoadingProgress} />
         </Suspense>
       </Canvas>
     </div>
