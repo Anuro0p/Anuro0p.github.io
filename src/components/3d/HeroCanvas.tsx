@@ -293,6 +293,42 @@ const GlitchEffect = ({ active, duration = 700 }: { active: boolean; duration?: 
 };
 
 /**
+ * Revolving Sun Light Component
+ * Creates a directional light that orbits around the scene like a sun
+ */
+const RevolvingSun = () => {
+  const lightRef = useRef<THREE.DirectionalLight>(null);
+  const orbitRadius = 15; // Distance from center
+  const orbitHeight = 8; // Height of the orbit
+  const orbitSpeed = 0.3; // Speed of rotation
+
+  useFrame(({ clock }) => {
+    if (lightRef.current) {
+      const time = clock.getElapsedTime();
+      // Create circular orbit in XZ plane, with slight vertical variation
+      const x = Math.cos(time * orbitSpeed) * orbitRadius;
+      const z = Math.sin(time * orbitSpeed) * orbitRadius;
+      const y = orbitHeight + Math.sin(time * orbitSpeed * 0.5) * 2; // Slight vertical movement
+      
+      lightRef.current.position.set(x, y, z);
+      // Make the light point towards the center of the scene
+      lightRef.current.lookAt(0, 0, 0);
+    }
+  });
+
+  return (
+    <directionalLight
+      ref={lightRef}
+      intensity={0.5}
+      color="#5b4bff" //blue 
+      // color="#ff00ff" //majenta
+      // color="#ff0000" //red 
+      castShadow={false}
+    />
+  );
+};
+
+/**
  * Main scene component
  */
 const Scene = ({ 
@@ -323,6 +359,9 @@ const Scene = ({
         {/* Additional Lights for Model2 - Magenta and White */}
         {currentModel === "model2" && (
           <>
+            {/* Revolving Sun Light */}
+            <RevolvingSun />
+
             {/* Magenta Lights */}
             <pointLight position={[3, 3, 5]} intensity={1.2} color="#ff00ff" />
             <pointLight position={[-3, 3, 5]} intensity={1.2} color="#ff00ff" />
