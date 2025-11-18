@@ -4,8 +4,8 @@ import { Stars, Text3D, useGLTF, useProgress } from '@react-three/drei';
 import { CosmicParticles } from './CosmicParticles';
 import { useLoading } from '../../contexts/LoadingContext';
 import * as THREE from 'three';
-import modelPath from "./models/tunnel_test.glb?url";
-import modelPath2 from "./models/model2.glb?url";
+import modelPath from "./models/tunnel_testlow.glb?url";
+import modelPath2 from "./models/model2low.glb?url";
 
 
 /**
