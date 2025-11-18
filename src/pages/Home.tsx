@@ -1,15 +1,13 @@
 import { motion } from 'framer-motion';
-import { HeroCanvas } from '../components/3d/HeroCanvas';
 
 /**
  * Home page component
  * Fullscreen hero with 3D canvas (name is now in 3D)
+ * Note: HeroCanvas is rendered in AppRouter to ensure loading tracking works
  */
 export const Home = () => {
   return (
     <div className="relative min-h-screen">
-      <HeroCanvas />
-      
       {/* Optional overlay text - can be removed if 3D text is sufficient */}
       <div className="z-10 relative flex justify-center items-center min-h-screen pointer-events-none">
         <div className="mx-auto px-8 max-w-4xl text-center">

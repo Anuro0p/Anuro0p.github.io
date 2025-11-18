@@ -38,7 +38,7 @@ export const CosmicParticles = () => {
   const points = useRef<THREE.Points>(null!);
 
   const { geometry, material } = useMemo(() => {
-    const count = 2000;
+    const count = 1000;
     const posArray = new Float32Array(count * 3);
     const colorArray = new Float32Array(count * 3);
     const sizeArray = new Float32Array(count);

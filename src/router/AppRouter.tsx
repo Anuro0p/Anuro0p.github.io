@@ -5,6 +5,9 @@ import { Home } from '../pages/Home';
 import { About } from '../pages/About';
 import { Work } from '../pages/Work';
 import { Contact } from '../pages/Contact';
+import { LoadingProvider, useLoading } from '../contexts/LoadingContext';
+import { Loader } from '../components/ui/Loader';
+import { HeroCanvas } from '../components/3d/HeroCanvas';
 
 /**
  * Router component with page transitions
@@ -28,12 +31,32 @@ const AnimatedRoutes = () => {
  * Main app router
  * Sets up React Router with BrowserRouter
  */
+const AppRouterContent = () => {
+  const { isLoading, progress } = useLoading();
+  const location = useLocation();
+
+  return (
+    <>
+      {/* Always render HeroCanvas on home route so LoadingTracker can run */}
+      {location.pathname === '/' && <HeroCanvas />}
+      
+      <Loader progress={progress} active={isLoading} />
+      
+      {!isLoading && (
+        <Layout>
+          <AnimatedRoutes />
+        </Layout>
+      )}
+    </>
+  );
+};
+
 export const AppRouter = () => {
   return (
     <BrowserRouter>
-      <Layout>
-        <AnimatedRoutes />
-      </Layout>
+      <LoadingProvider>
+        <AppRouterContent />
+      </LoadingProvider>
     </BrowserRouter>
   );
 };

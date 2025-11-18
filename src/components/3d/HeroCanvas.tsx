@@ -1,10 +1,10 @@
-import { Suspense, useRef, useState, useEffect, useCallback } from 'react';
+import { Suspense, useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Stars, Text3D, useGLTF, useProgress } from '@react-three/drei';
 import { CosmicParticles } from './CosmicParticles';
-import { Loader } from '../ui/Loader';
+import { useLoading } from '../../contexts/LoadingContext';
 import * as THREE from 'three';
-import modelPath from './models/model1.glb?url';
+import modelPath from "./models/tunnel_test.glb?url";
 
 /**
  * Floating 3D name component
@@ -72,53 +72,68 @@ const FloatingName = () => {
 };
 
 /**
- * 3D Model component with slight cursor-based tilt (no auto-rotation)
+ * 3D Tunnel Model - positioned around the camera with scroll-based Z position
  */
 const Model3D = () => {
   const { scene } = useGLTF(modelPath);
-  const lookAtGroupRef = useRef<THREE.Group>(null!);
-  const tiltGroupRef = useRef<THREE.Group>(null!);
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
-
-  useFrame(({ camera }) => {
-    if (lookAtGroupRef.current) {
-      // Make the outer group always face the camera
-      lookAtGroupRef.current.lookAt(camera.position);
-    }
-    
-    if (tiltGroupRef.current) {
-      // Apply slight tilt based on mouse position
-      const tiltX = mouse.y * 0.1; // Subtle tilt forward/backward
-      const tiltY = mouse.x * 0.1; // Subtle tilt left/right
-      
-      tiltGroupRef.current.rotation.x = tiltX;
-      tiltGroupRef.current.rotation.y = tiltY;
-    }
-  });
-
-  useEffect(() => {
-    const handleMove = (e: MouseEvent) => {
-      // Normalize mouse coordinates to -1 to 1
-      setMouse({
-        x: (e.clientX / window.innerWidth) * 2 - 1,
-        y: -(e.clientY / window.innerHeight) * 2 + 1,
-      });
-    };
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('mousemove', handleMove);
-      return () => window.removeEventListener('mousemove', handleMove);
-    }
-  }, []);
+  const tunnelRef = useRef<THREE.Group>(null!);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   // Clone the scene to avoid issues with multiple instances
   const clonedScene = scene.clone();
 
+  // Track scroll position and calculate progress
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      
+      // Calculate scroll progress (0 to 1)
+      // Adjust these values to control when the animation starts/ends
+      const maxScroll = documentHeight - windowHeight;
+      const progress = Math.min(Math.max(scrollY / maxScroll, 0), 1);
+      
+      setScrollProgress(progress);
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleScroll);
+      handleScroll(); // Initial call
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+
+  // Update tunnel position based on scroll
+  useFrame(() => {
+    if (tunnelRef.current) {
+      // Interpolate Z position from 6 to 0 based on scroll progress
+      const startZ = 9;
+      const endZ = 0;
+      const currentZ = startZ - (startZ - endZ) * scrollProgress;
+      
+      tunnelRef.current.position.x = 0.6;
+      tunnelRef.current.position.y = -1;
+      tunnelRef.current.position.z = currentZ;
+    }
+  });
+
+  // Calculate bounding box to understand model size
+  useEffect(() => {
+    if (tunnelRef.current) {
+      const box = new THREE.Box3().setFromObject(tunnelRef.current);
+      const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
+      console.log('Tunnel model size:', size);
+      console.log('Tunnel model center:', center);
+    }
+  }, []);
+
+  // Position tunnel at origin so camera is inside it
+  // Rotated 90 degrees on Y axis
   return (
-    <group ref={lookAtGroupRef} position={[0, -0.8, -2]} scale={[6, 6, 5.5]}>
-      <group ref={tiltGroupRef}>
-        <primitive object={clonedScene} />
-      </group>
+    <group ref={tunnelRef} position={[0.6, -1, 7]} rotation={[0, 270 * Math.PI / 180, 0]} scale={[1, 1, 1]}>
+      <primitive object={clonedScene} />
     </group>
   );
 };
@@ -127,22 +142,25 @@ const Model3D = () => {
 useGLTF.preload(modelPath);
 
 /**
- * Camera rig with mouse parallax
+ * Camera rig with mouse parallax - camera stays inside tunnel, slight movement
  */
 const CameraRig = ({ children }: { children: React.ReactNode }) => {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
   useFrame(({ camera }) => {
-    camera.position.x += (mouse.x * 2 - camera.position.x) * 0.1;
-    camera.position.y += (mouse.y * 2 - camera.position.y) * 0.1;
-    camera.lookAt(0, 0, 0);
+    // Slight camera movement inside the tunnel based on mouse
+    // Keep camera looking forward down the tunnel
+    camera.position.x += (mouse.x * 0.3 - camera.position.x) * 0.1;
+    camera.position.y += (mouse.y * 0.3 - camera.position.y) * 0.1;
+    // Camera looks forward down the tunnel (positive Z direction)
+    camera.lookAt(camera.position.x, camera.position.y, camera.position.z + 1);
   });
 
   useEffect(() => {
     const handleMove = (e: MouseEvent) => {
       setMouse({
-        x: (e.clientX / window.innerWidth - 0.5) * 5,
-        y: -(e.clientY / window.innerHeight - 0.5) * 5,
+        x: (e.clientX / window.innerWidth - 0.5) * 2,
+        y: -(e.clientY / window.innerHeight - 0.5) * 2,
       });
     };
 
@@ -157,14 +175,15 @@ const CameraRig = ({ children }: { children: React.ReactNode }) => {
 
 /**
  * Loading progress tracker component
- * Tracks loading progress and communicates it to parent
+ * Tracks loading progress and communicates it to parent via context
  */
-const LoadingTracker = ({ onProgress }: { onProgress: (progress: number, active: boolean) => void }) => {
+const LoadingTracker = () => {
   const { progress, active } = useProgress();
+  const { setLoading } = useLoading();
   
   useEffect(() => {
-    onProgress(progress, active);
-  }, [progress, active, onProgress]);
+    setLoading(active, progress);
+  }, [progress, active, setLoading]);
 
   return null;
 };
@@ -172,10 +191,10 @@ const LoadingTracker = ({ onProgress }: { onProgress: (progress: number, active:
 /**
  * Main scene component
  */
-const Scene = ({ onLoadingProgress }: { onLoadingProgress: (progress: number, active: boolean) => void }) => {
+const Scene = () => {
   return (
     <>
-      <LoadingTracker onProgress={onLoadingProgress} />
+      <LoadingTracker />
       <CameraRig>
         {/* Background Stars */}
         <Stars radius={300} depth={60} count={3500} factor={4} fade speed={1} />
@@ -188,36 +207,27 @@ const Scene = ({ onLoadingProgress }: { onLoadingProgress: (progress: number, ac
         <directionalLight position={[5, 5, 5]} intensity={0.9} color="#5b4bff" />
         <pointLight position={[-3, -2, -3]} intensity={0.7} color="#6f2cff" />
 
-        {/* Floating Name */}
-        <group position={[0, 0.5, 0]}>
+        {/* Floating Name - positioned ahead in the tunnel */}
+        <group position={[0, 0, 3]}>
           <FloatingName />
         </group>
       </CameraRig>
 
-      {/* 3D Model outside CameraRig - only responds to its own cursor tilt, not camera parallax */}
+      {/* 3D Tunnel Model - camera is inside */}
       <Model3D />
     </>
   );
 };
 
 export const HeroCanvas = () => {
-  const [loadingProgress, setLoadingProgress] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleLoadingProgress = useCallback((progress: number, active: boolean) => {
-    setLoadingProgress(progress);
-    setIsLoading(active);
-  }, []);
-
   return (
     <div className="-z-10 fixed inset-0 bg-black w-screen h-screen overflow-hidden">
-      <Loader progress={loadingProgress} active={isLoading} />
       <Canvas 
-        camera={{ position: [0, 0, 7], fov: 55 }}
+        camera={{ position: [0, 0, 0], fov: 75 }}
         gl={{ alpha: false }}
       >
         <Suspense fallback={null}>
-          <Scene onLoadingProgress={handleLoadingProgress} />
+          <Scene />
         </Suspense>
       </Canvas>
     </div>
